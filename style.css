@@ -1,92 +1,41 @@
-/* اضافه به style.css */
-.contact-section {
-    padding: 4rem 2rem;
-    min-height: 100vh;
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Vazir', sans-serif;
+    line-height: 1.6;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 5%;
+    background: rgba(255, 255, 255, 0.95);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+.hero {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+                url('assets/images/hero-bg.jpg');
+    background-size: cover;
+    color: white;
+    text-align: center;
+}
+
+.projects-grid {
     display: grid;
-    place-items: center;
-}
-
-.glass-form {
-    background: rgba(255,255,255,0.05);
-    backdrop-filter: blur(20px);
-    border-radius: 2rem;
-    padding: 3rem;
-    max-width: 600px;
-    width: 100%;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-}
-
-.input-group {
-    position: relative;
-    margin: 2rem 0;
-}
-
-.input-group input,
-.input-group textarea {
-    width: 100%;
-    background: transparent;
-    border: none;
-    border-bottom: 1px solid rgba(255,255,255,0.2);
-    color: white;
-    padding: 0.5rem 0;
-    transition: 0.3s;
-}
-
-.input-group label {
-    position: absolute;
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    pointer-events: none;
-    transition: 0.3s;
-}
-
-.input-group input:focus ~ label,
-.input-group textarea:focus ~ label,
-.input-group input:valid ~ label,
-.input-group textarea:valid ~ label {
-    top: -20px;
-    font-size: 0.8rem;
-}
-
-@media (max-width: 768px) {
-    .glass-form {
-        padding: 2rem;
-        border-radius: 1rem;
-    }
-    
-    .contact-section {
-        padding: 4rem 1rem;
-    }
-}
-/* اضافه به style.css */
-button {
-    position: relative;
-    overflow: hidden;
-    background: none;
-    border: 1px solid rgba(255,255,255,0.3);
-    color: white;
-    padding: 1rem 2rem;
-    border-radius: 50px;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.hover-effect {
-    position: absolute;
-    background: rgba(255,255,255,0.1);
-    width: 50px;
-    height: 100%;
-    left: -50%;
-    transform: skewX(-30deg);
-    transition: 0.3s;
-}
-
-button:hover .hover-effect {
-    left: 150%;
-}
-
-@keyframes confetti {
-    0% { transform: translate(0,0) rotate(0); opacity: 1; }
-    100% { transform: translate(var(--x, 0), var(--y, -100px)) rotate(720deg); opacity: 0; }
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    padding: 4rem 5%;
 }
