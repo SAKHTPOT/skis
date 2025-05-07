@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اسکی های هنری | SKIS.ART</title>
+    <style>
+        :root {
+            --primary: #2a2a2a;
+            --secondary: #f0f0f0;
+            --accent: #ff6b6b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', system-ui;
+        }
+
+        body {
+            background: linear-gradient(45deg, var(--secondary), #fff);
+            color: var(--primary);
+            min-height: 100vh;
+        }
+
+        .art-nav {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            z-index: 100;
+        }
+
+        .art-nav a {
+            margin: 0 1rem;
+            text-decoration: none;
+            color: inherit;
+            position: relative;
+            padding: 0.5rem;
+            transition: 0.3s;
+        }
+
+        .art-nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: 0.3s;
+        }
+
+        .art-nav a:hover::after {
+            width: 100%;
+        }
+
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .art-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 4rem 2rem;
+        }
+
+        .art-card {
+            background: rgba(255,255,255,0.9);
+            border-radius: 16px;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            transition: 0.3s;
+        }
+
+        .art-card:hover {
+            transform: translateY(-10px);
+        }
+
+        @media (max-width: 768px) {
+            .art-nav {
+                top: 1rem;
+                right: 1rem;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="art-nav">
+        <a href="#home">خانه</a>
+        <a href="#products">محصولات</a>
+        <a href="#about">درباره</a>
+        <a href="#contact">تماس</a>
+    </nav>
+
+    <section id="home" class="hero">
+        <h1 style="font-size: 4rem; margin-bottom: 1rem;">اسکی های هنری</h1>
+        <p>طراحی شده برای حرکات موزون برف</p>
+    </section>
+
+    <section id="products" class="art-grid">
+        <!-- Product cards will be dynamically loaded here -->
+    </section>
+
+    <script>
+        // Dynamic content loading
+        const products = [
+            {title: 'مدل کلاسیک', desc: 'طراحی سنتی با مواد مدرن'},
+            {title: 'مدل ورزشی', desc: 'بهینه شده برای سرعت'},
+            {title: 'مدل هنری', desc: 'طرح های محدود شده هنری'}
+        ];
+
+        const renderProducts = () => {
+            const grid = document.querySelector('.art-grid');
+            grid.innerHTML = products.map(product => `
+                <div class="art-card">
+                    <h3>${product.title}</h3>
+                    <p>${product.desc}</p>
+                </div>
+            `).join('');
+        };
+
+        // Intersection Observer for animations
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        });
+
+        // Init
+        window.addEventListener('DOMContentLoaded', () => {
+            renderProducts();
+            document.querySelectorAll('.art-card').forEach(card => {
+                card.style.opacity = 0;
+                card.style.transform = 'translateY(50px)';
+                card.style.transition = '0.6s cubic-bezier(0.23, 1, 0.32, 1)';
+                observer.observe(card);
+            });
+        });
+    </script>
+</body>
+</html>
