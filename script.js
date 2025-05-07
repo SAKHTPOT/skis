@@ -1,67 +1,74 @@
-class ArtGallery {
+// اضافه به script.js
+class ContactForm {
     constructor() {
-        this.items = [
-            {title: 'کاوشگر برف', tags: ['مینیمال', 'مدرن']},
-            {title: 'باله سفید', tags: ['کلاسیک', 'هنری']},
-            {title: 'خطوط ناب', tags: ['گرافیک', 'مفهومی']}
-        ];
-        
+        this.form = document.getElementById('art-form');
         this.init();
     }
 
     init() {
-        this.renderGallery();
-        this.addObservers();
-        this.addPoetry();
+        this.addHoverEffects();
+        this.addFormValidation();
+        this.addIntersectionObserver();
     }
 
-    renderGallery() {
-        const grid = document.querySelector('.grid-portfolio');
-        grid.innerHTML = this.items.map(item => `
-            <article class="art-card">
-                <h3>${item.title}</h3>
-                <div class="tags">${item.tags.map(t => `<span>#${t}</span>`).join('')}</div>
-            </article>
-        `).join('');
+    addHoverEffects() {
+        document.querySelectorAll('.input-group').forEach(group => {
+            group.addEventListener('mousemove', (e) => {
+                const rect = group.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                group.style.setProperty('--mouse-x', `${x}px`);
+            });
+        });
     }
 
-    addObservers() {
+    addFormValidation() {
+        this.form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            // افزودن منطق ارسال فرم
+            this.showConfetti();
+        });
+    }
+
+    addIntersectionObserver() {
         const observer = new IntersectionObserver(entries => {
             entries.forEach(entry => {
                 if(entry.isIntersecting) {
-                    entry.target.classList.add('emerge');
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transform = 'translateY(0)';
                 }
             });
         });
 
-        document.querySelectorAll('.art-card').forEach(card => {
-            card.style.setProperty('--delay', `${Math.random() * 0.5}s`);
-            observer.observe(card);
-        });
+        observer.observe(document.querySelector('.glass-form'));
     }
 
-    addPoetry() {
-        const poems = [
-            'برف می‌بارد روی اسکی های خاموش',
-            'خطوط برف را با حرکت می‌نوازم',
-            'هر شیار حکایتی از سرعت است'
-        ];
-        
-        const subtitle = document.querySelector('.subtitle');
-        let index = 0;
-        
-        setInterval(() => {
-            subtitle.style.animation = 'fade 1s';
+    showConfetti() {
+        // افزودن افکت کانفتی
+        const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1'];
+        for(let i = 0; i < 50; i++) {
+            const dot = document.createElement('div');
+            dot.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                background: ${colors[Math.floor(Math.random()*colors.length)]};
+                width: 8px;
+                height: 8px;
+                border-radius: 50%;
+                pointer-events: none;
+                animation: confetti 1s ease-out;
+            `;
+            
+            document.body.appendChild(dot);
+            
             setTimeout(() => {
-                subtitle.textContent = poems[index];
-                index = (index + 1) % poems.length;
-                subtitle.style.animation = '';
+                dot.remove();
             }, 1000);
-        }, 5000);
+        }
     }
 }
 
-// Initialize
+// مقداردهی هنگام لود صفحه
 document.addEventListener('DOMContentLoaded', () => {
-    new ArtGallery();
+    new ContactForm();
 });
