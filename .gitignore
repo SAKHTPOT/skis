@@ -1,2 +1,3 @@
 node_modules/
-vspace.code-workspace
+.DS_Store
+*.webp
