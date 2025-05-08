@@ -1,14 +1,22 @@
 body {
     font-family: 'Vazirmatn', sans-serif;
     text-align: center;
-    background-color: #fefae0;
-    color: #3a3a3a;
+    background-color: #fdf6e3;
+    color: #333;
     margin: 0;
 }
 
 header {
-    background-color: #f4a261;
-    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #b5838d;
+    padding: 15px;
+}
+
+.logo {
+    font-size: 24px;
+    color: white;
 }
 
 nav ul {
@@ -23,12 +31,32 @@ nav ul li {
 
 nav ul li a {
     text-decoration: none;
-    color: #2a9d8f;
+    color: white;
     font-weight: bold;
 }
 
-footer {
-    background-color: #264653;
+.hero {
+    background-image: url('art-background.jpg');
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     color: white;
-    padding: 10px;
+}
+
+.gallery {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.art-box {
+    background: #eae0d5;
+    width: 100px;
+    height: 100px;
+    margin: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
 }
